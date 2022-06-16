@@ -10,6 +10,7 @@ const login = () => {
     psword: psword.value,
   };
 
+  //1.프런트에서 서버로 패치를 이용해 정보넘김. req.body에 정보를 담아 post req 보냄
   fetch('/login', {
     method: 'POST',
     headers: {
@@ -17,7 +18,7 @@ const login = () => {
     },
     body: JSON.stringify(req),
   })
-    .then((res) => res.json())
+    .then((res) => res.json()) //3.then으로 서버에서 온 res를 처리한다.
     .then((res) => {
       if (res.success) {
         location.href = '/';
