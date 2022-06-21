@@ -1,7 +1,6 @@
 //모듈
 const express = require('express');
 const app = express();
-
 //라우팅
 const home = require('./src/routes/home'); //루트경로로 오면 홈으로 이동
 
