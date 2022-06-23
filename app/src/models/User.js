@@ -7,17 +7,27 @@ class User {
     this.body = body;
   }
 
-  login() {
-    const body = this.body;
-    const { id, psword } = UserStorage.getUserInfo(body.id);
+  async login() {
+    const client = this.body;
+    const { id, psword } = await UserStorage.getUserInfo(client.id);
 
     if (id) {
-      if (id === body.id && psword === body.psword) {
-        return { succeess: true };
+      if (id === client.id && psword === client.psword) {
+        return { succeess: true, msg: '로그인성공' };
       }
       return { succeess: false, msg: '틀린 비밀번호' };
     }
     return { succeess: false, msg: '존재하지 않는 아이디' };
+  }
+
+  async register() {
+    const client = this.body;
+    try {
+      const response = await UserStorage.save(client);
+      return response;
+    } catch (err) {
+      return { succeess: false, msg: err };
+    }
   }
 }
 

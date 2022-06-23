@@ -2,7 +2,7 @@
 
 const id = document.querySelector('#id'),
   psword = document.querySelector('#psword'),
-  loginBtn = document.querySelector('button');
+  loginBtn = document.querySelector('#button');
 
 const login = () => {
   const req = {
@@ -20,7 +20,7 @@ const login = () => {
   })
     .then((res) => res.json()) //3.then으로 서버에서 온 res를 처리한다.
     .then((res) => {
-      if (res.success) {
+      if (res.succeess) {
         location.href = '/';
       } else {
         alert(res.msg);
