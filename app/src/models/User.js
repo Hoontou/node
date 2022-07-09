@@ -9,15 +9,19 @@ class User {
 
   async login() {
     const client = this.body;
-    const { id, psword } = await UserStorage.getUserInfo(client.id);
+    try {
+      const { id, psword } = await UserStorage.getUserInfo(client.id);
 
-    if (id) {
-      if (id === client.id && psword === client.psword) {
-        return { succeess: true, msg: '로그인성공' };
+      if (id) {
+        if (id === client.id && psword === client.psword) {
+          return { succeess: true, msg: '로그인성공' };
+        }
+        return { succeess: false, msg: '틀린 비밀번호' };
       }
-      return { succeess: false, msg: '틀린 비밀번호' };
+      return { succeess: false, msg: '존재하지 않는 아이디' };
+    } catch (err) {
+      return { sueccess: false, msg: err };
     }
-    return { succeess: false, msg: '존재하지 않는 아이디' };
   }
 
   async register() {
